@@ -290,7 +290,8 @@ fn draw_add(f: &mut Frame, app: &App) {
     let py = area.y + (area.height.saturating_sub(ph))/2;
     let pa = Rect { x:px, y:py, width:pw, height:ph };
     f.render_widget(Clear, pa);
-    let buf = if app.input.len()>40 { &app.input[app.input.len()-40..] } else { &app.input };
+    let buf_owned: String = app.input.chars().rev().take(40).collect::<String>().chars().rev().collect();
+    let buf = &buf_owned;
     f.render_widget(Paragraph::new(vec![
         Line::from(Span::styled("  ➕  НОВАЯ ЗАДАЧА", Style::default().fg(GOLD).add_modifier(Modifier::BOLD))),
         Line::from(""),
