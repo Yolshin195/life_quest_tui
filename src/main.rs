@@ -133,7 +133,7 @@ impl App {
     }
     fn add_task(&mut self, text: String) {
         if text.trim().is_empty() { return; }
-        let xp = ((text.len() as u32 / 5) + 1).min(50) * 10;
+        let xp = ((text.chars().count() as u32 / 5) + 1).min(50) * 10;
         let id = self.state.next_task_id; self.state.next_task_id += 1;
         self.state.tasks.push(Task { id, text: text.trim().to_string(), done: false, xp });
         self.state.save();
